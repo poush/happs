@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+# $1 = exit code, $2 = 256 when killed during a clean S6 shutdown
+
+if [ "${2}" -ne 256 ]; then
+    bashio::log.error "WhatsApp bridge crashed (exit ${1}) — halting container for supervisor restart"
+    s6-svscanctl -t /var/run/service
+fi

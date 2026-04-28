@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+
+MCP_PORT=$(bashio::config 'mcp_port' '8000')
+export MCP_PORT
+
+bashio::log.info "Starting WhatsApp MCP server (SSE) on :${MCP_PORT} ..."
+
+cd /opt/whatsapp-mcp-server || exit 1
+exec uv run python /opt/whatsapp-mcp/run_sse.py

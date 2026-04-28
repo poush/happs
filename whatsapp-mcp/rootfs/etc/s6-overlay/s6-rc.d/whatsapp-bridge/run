@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+
+# Ensure persistent store directory exists under /data (the add-on's volume)
+mkdir -p /data/store
+
+bashio::log.info "Starting WhatsApp bridge on :8080 ..."
+bashio::log.info "Check the log below for the QR code on first run."
+
+# Run from /data so the bridge writes ./store/ -> /data/store/
+cd /data || exit 1
+exec /usr/local/bin/whatsapp-bridge

@@ -1,0 +1,28 @@
+name: WhatsApp MCP
+description: >-
+  WhatsApp bridge (Go/whatsmeow) + MCP SSE server (Python). Scan the QR code
+  in the add-on log to authenticate, then point any MCP client at the exposed
+  port.
+version: "1.0.0"
+slug: whatsapp_mcp
+init: false
+arch:
+  - aarch64
+  - amd64
+
+homeassistant_api: false
+hassio_api: false
+
+ports:
+  "8000/tcp": 8000
+ports_description:
+  "8000/tcp": "MCP SSE endpoint"
+
+# /data is the add-on's persistent volume (survives restarts/updates)
+# The Go bridge will write its SQLite store here.
+
+options:
+  mcp_port: 8000
+
+schema:
+  mcp_port: int

@@ -19,7 +19,11 @@ _original_run = FastMCP.run
 
 def _sse_run(self, transport=None, **kwargs):  # noqa: ANN001
     port = int(os.environ.get("MCP_PORT", "8000"))
-    return _original_run(self, transport="sse", host="0.0.0.0", port=port, **kwargs)
+    # FastMCP.run() does not accept host/port as kwargs.
+    # Configure them via the settings object on the instance instead.
+    self.settings.host = "0.0.0.0"
+    self.settings.port = port
+    return _original_run(self, transport="sse", **kwargs)
 
 
 FastMCP.run = _sse_run

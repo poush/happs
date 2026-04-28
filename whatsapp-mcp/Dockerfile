@@ -17,6 +17,10 @@ WORKDIR /build
 RUN git clone --depth 1 --branch "${UPSTREAM_REF}" "${UPSTREAM_REPO}" .
 
 WORKDIR /build/whatsapp-bridge
+# Force-update whatsmeow to latest before building.
+# WhatsApp periodically requires a newer client version; the upstream go.sum
+# may lag behind, causing "Client outdated (405)" connection failures.
+RUN go get go.mau.fi/whatsmeow@latest && go mod tidy
 RUN CGO_ENABLED=1 GOOS=linux go build -o /usr/local/bin/whatsapp-bridge .
 
 # ---------------------------------------------------------------------------

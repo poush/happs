@@ -5,7 +5,7 @@ ARG UPSTREAM_REF=main
 # ---------------------------------------------------------------------------
 # Stage 1: Build the Go bridge
 # ---------------------------------------------------------------------------
-FROM golang:1.24-alpine AS go-builder
+FROM golang:1.25-alpine AS go-builder
 
 ARG UPSTREAM_REPO
 ARG UPSTREAM_REF

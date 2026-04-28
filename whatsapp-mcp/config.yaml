@@ -3,7 +3,7 @@ description: >-
   WhatsApp bridge (Go/whatsmeow) + MCP SSE server (Python). Scan the QR code
   in the add-on log to authenticate, then point any MCP client at the exposed
   port.
-version: "1.0.0"
+version: "0.0.1"
 slug: whatsapp_mcp
 init: false
 arch:
